@@ -1,0 +1,15 @@
+<form [formGroup]="Form">
+  <mat-form-field>
+    <input matInput placeholder="What's Your Name" formControlName="Name">
+  </mat-form-field>
+  <div>
+    <button mat-raised-button (click)="openDialog()">pick one</button>
+  </div>
+  <div *ngIf="subject">
+      You chose: <i>{{subject}}</i>
+  </div>
+     </form>
+
+
+
+    

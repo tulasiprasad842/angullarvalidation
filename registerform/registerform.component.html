@@ -1,0 +1,76 @@
+<div class="container">
+  <mat-card>
+    <mat-toolbar color="primary">
+      <h1 class="header">REGISTRATION FORM</h1>
+    </mat-toolbar>
+
+    <form [formGroup]="myForm" ngsubmit="onsubmit()">
+  <mat-form-field>
+    <input matInput placeholder="Enter Your Name" formControlName="name" required>
+    <mat-error *ngIf="myForm.controls?.name.errors?.required">name is required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Enter Your Email" formControlName="email" required>
+    <mat-error *ngIf="myForm.controls.email.errors?.required">Please Enter Your email</mat-error>
+    <mat-error *ngIf="myForm.controls.email.hasError('Email')">This Is a Invalid email</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Create Your Password" formControlName="pass" required [type]="hide ? 'password' : 'text'">
+    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+    </button>
+    <mat-error *ngIf="myForm.controls.pass.errors?.required">Please Create Your Password</mat-error>  </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Confirm Your Password" (keypress)="checkPassword()" formControlName="confirmPass" required (keyup)="checkPassword()">
+    </mat-form-field>
+    <mat-error *ngIf="misMatch">Password Do Not Match</mat-error>
+
+
+  <mat-form-field>
+    <input matInput placeholder="Enter MobileNumber" formControlName="mobile" minlength="10" maxlength="10" required numbersOnly>
+    <mat-error *ngIf="myForm.controls.mobile.errors?.required">Mobile Number is Required</mat-error>
+        <mat-error *ngIf="myForm.controls.mobile.errors?.minlength || myForm.controls.mobile.errors?.maxlength">Mobile Number Must be 10 digits Only</mat-error>
+        <mat-error *ngIf="myForm.controls.mobile.errors?.pattern">Number Must be Digits Only</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Education Details</mat-label>
+    <mat-select formControlName="education" required>
+      <mat-option>select one Option</mat-option>
+      <mat-option *ngFor="let education of educations" [value]="education.viewValue">
+        {{education.viewValue}}
+       </mat-option>
+     </mat-select>
+     <mat-error *ngIf="myForm.controls.education.errors?.required">please select one Option</mat-error>
+  </mat-form-field>
+
+  <section>
+    <mat-radio-group formControlName="gender" required>
+      <mat-label>gender</mat-label>
+      <mat-radio-button class="radio-margin" value="male">Male</mat-radio-button>
+      <mat-radio-button class="radio-margin" value="female">Female</mat-radio-button>
+    </mat-radio-group>
+  </section>
+
+  <mat-form-field>
+      <input matInput [matDatepicker]="picker" placeholder="Choose Your Date Of Birth" formControlName="dob" required>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="myForm.controls.dob.errors?.required">Please Choose Your Date Of Birth</mat-error>
+  </mat-form-field>
+
+  <!-- <div>
+    <mat-checkbox class="checkbox-margin" #terms>Accept Terms and Conditions</mat-checkbox>
+  </div> -->
+
+  <div>
+    <button class="btn btn-success" [disabled]="!myForm.valid">Register</button>
+  </div>
+    </form>
+
+    {{myForm.value|json}}
+  </mat-card>
+</div>

@@ -1,0 +1,38 @@
+<h2>LOGIN FORM</h2>
+<div class="container">
+    {{selectForm.value | json}}
+  <form [formGroup]="selectForm" (ngsubmit)="onSubmit">
+
+    <mat-form-field>
+      <input matInput placeholder="name"  formControlName="Name"  maxlength="10" (keypress)=keyPress1($event)>
+      <mat-error *ngIf="selectForm.controls?.Name.errors?.required">name is required</mat-error>
+    </mat-form-field><br>
+
+    
+        <mat-form-field>
+            <mat-select placeholder="select subjects"  formControlName="Subjects" multiple>
+            <mat-option *ngFor="let course of courselist"  [value] = "course.viewValue">{{course.viewValue}}</mat-option>
+            </mat-select>
+       </mat-form-field><br>
+   
+    <mat-form-field>
+      <input matInput placeholder="userName" formControlName="userName">
+      <mat-error *ngIf="selectForm.controls?.userName.errors?.required">username is required</mat-error>
+    </mat-form-field><br>
+
+    <mat-form-field>
+      <input type="password" matInput placeholder= "password"  formControlName="password" maxlength="8" passwordToggle required>
+     <mat-error *ngIf="selectForm.controls?.password.errors?.required">password is required</mat-error>
+    </mat-form-field><br>
+
+   
+      <mat-form-field>
+          <mat-select placeholder="select options"  formControlName="Options">
+          <mat-option *ngFor="let user of userlist" [value] = "user.value">{{user.viewValue}}</mat-option>
+        </mat-select>
+              </mat-form-field><br>
+
+       <button mat-raised-button [disabled]="!selectForm.valid" (click)="onSubmit()">Save</button>
+    </form>
+  </div>
+

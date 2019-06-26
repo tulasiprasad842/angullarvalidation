@@ -1,0 +1,8 @@
+<form [formGroup]="selForm">
+  <mat-form-field>
+    <mat-select placeholder="select department" formControlName="department">
+    <mat-option *ngFor="let option of optionlist" [value]="option.value">{{option.viewValue}}</mat-option>
+  </mat-select>
+</mat-form-field>
+<p>you selected: {{selForm.value|json}}</p>
+</form>

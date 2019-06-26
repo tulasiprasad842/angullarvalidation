@@ -1,0 +1,106 @@
+<mat-accordion class="container-header-align">
+    <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+    <mat-expansion-panel-header>
+      <mat-panel-title>personal data</mat-panel-title>
+      <mat-panel-description>enter your details</mat-panel-description>
+      <mat-icon>account_circle</mat-icon>
+     </mat-expansion-panel-header>
+  <form [formGroup]="expandForm">
+     <mat-form-field>
+      <input matInput placeholder="firstName" formControlName="firstName" maxlength="10" (keypress)=keyPress($event)>
+      <mat-error *ngIf="expandForm.controls?.firstName.errors?.required">firstName is required</mat-error>
+     </mat-form-field><br>
+     <mat-form-field>
+      <input matInput placeholder="lastName" formControlName="lastName" maxlength="10" (keypress)=keyPress1($event)>
+      <mat-error *ngIf="expandForm.controls?.lastName.errors?.required">lastName is required</mat-error>
+     </mat-form-field><br>
+     <mat-form-field>
+       <input matInput type="number" min="1" placeholder="Age" formControlName="Age">
+       <mat-error *ngIf="expandForm.controls?.Age.errors?.required">Age is required</mat-error>
+     </mat-form-field><br>
+     <mat-form-field>
+        <input matInput [matDatepicker]="picker" placeholder="Date_of_Birth" formControlName="Date_of_Birth">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="expandForm.controls?.Date_of_Birth.errors?.required">Date of Birth is required</mat-error>
+      </mat-form-field>
+      <mat-action-row>
+        <button mat-raised-button [disabled]="!expandForm.valid" (click)="nextStep()">Next</button>
+      </mat-action-row>
+    </form>
+   </mat-expansion-panel>
+   <!-- {{expandForm.value | json}} -->
+  
+
+   <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
+    <mat-expansion-panel-header>
+     <mat-panel-title>family details</mat-panel-title>
+     <mat-panel-description>Enter Family Details</mat-panel-description>
+     <mat-icon>info</mat-icon>
+    </mat-expansion-panel-header>
+
+    <form [formGroup]="panelForm">
+    <mat-form-field>
+      <input matInput placeholder="fatherName" formControlName="fatherName" maxlength="10" (keypress)=keyPress2($event)>
+      <mat-error *ngIf="panelForm.controls?.fatherName.errors?.required">fatherName is required</mat-error>
+    </mat-form-field><br>
+    <mat-form-field>
+      <input matInput placeholder="motherName" formControlName="motherName" maxlength="10" (keypress)=keyPress3($event)>
+      <mat-error *ngIf="panelForm.controls?.motherName.errors?.required">motherName is required</mat-error>
+    </mat-form-field><br>
+    <mat-form-field>
+      <input matInput placeholder="streetName" formControlName="streetName"  (keypress)=keyPress4($event)>
+      <mat-error *ngIf="panelForm.controls?.streetName.errors?.required">streetName is required</mat-error>
+    </mat-form-field><br>
+    <mat-form-field>
+      <input matInput placeholder="city" formControlName="city" (keypress)=keyPress5($event)>
+      <mat-error *ngIf="panelForm.controls?.city.errors?.required">city is required</mat-error>
+    </mat-form-field><br>
+    <mat-form-field>
+      <input matInput placeholder="State" formControlName="State"  (keypress)=keyPress6($event)>
+      <mat-error *ngIf="panelForm.controls?.State.errors?.required">State is required</mat-error>
+    </mat-form-field>
+    <mat-action-row>
+        <button mat-raised-button [disabled]="!panelForm.valid" (click)="prevStep()">Previous</button>
+        <button mat-raised-button [disabled]="!panelForm.valid" (click)="nextStep()">Next</button>
+    </mat-action-row>
+  </form>
+     </mat-expansion-panel>
+    
+
+     <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle>
+      <mat-expansion-panel-header>
+       <mat-panel-title>contact details</mat-panel-title>
+       <mat-panel-description>Enter Contact Details</mat-panel-description>
+       <mat-icon>email</mat-icon>
+      </mat-expansion-panel-header>
+
+   <form [formGroup]="completeForm">
+       <mat-form-field>
+         <input matInput placeholder="mobileNo" formControlName="mobileNo"  maxlength="10" (keypress)=keyPress7($event)>
+         <mat-error *ngIf="completeForm.controls?.mobileNo.errors?.required">mobileNo is required</mat-error>
+       </mat-form-field><br>
+       <mat-form-field>
+         <input matInput placeholder="emailId" formControlName="emailId">
+         <mat-error *ngIf="completeForm.controls?.emailId.errors?.required">emailId is required</mat-error>
+       </mat-form-field><br>
+       <mat-form-field>
+         <input matInput placeholder="alternate_mobileNo" formControlName="alternate_mobileNo"  maxlength="10" (keypress)=keyPress8($event)>
+         <mat-error *ngIf="completeForm.controls?.alternate_mobileNo.errors?.required">alternate mobileNo is required</mat-error>
+       </mat-form-field><br>
+       <mat-form-field>
+         <input matInput placeholder="alternate_emailId" formControlName="alternate_emailId">
+         <mat-error *ngIf="completeForm.controls?.alternate_emailId.errors?.required">alternate emailId is required</mat-error>
+       </mat-form-field>
+
+       <mat-action-row>
+          <button mat-raised-button [disabled]="!completeForm.valid" (click)="prevStep()">Previous</button>
+          <button mat-raised-button [disabled]="!completeForm.valid" (click)="nextStep()">End</button>
+       </mat-action-row>
+  </form>
+     </mat-expansion-panel>
+     <!-- {{completeForm.value | json}} -->
+    
+</mat-accordion>
+
+
